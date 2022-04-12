@@ -18,7 +18,7 @@ public class CustomerController {
         this.customerService = customerService;
     }
 
-    @GetMapping
+    @RequestMapping(method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
     public CustomerListDTO getListOfCustomers(){
         return new CustomerListDTO(customerService.getAllCustomers());
