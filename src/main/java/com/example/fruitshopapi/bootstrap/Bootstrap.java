@@ -2,9 +2,11 @@ package com.example.fruitshopapi.bootstrap;
 
 import com.example.fruitshopapi.domain.Category;
 import com.example.fruitshopapi.domain.Customer;
+import com.example.fruitshopapi.domain.Product;
 import com.example.fruitshopapi.domain.Vendor;
 import com.example.fruitshopapi.repositories.CategoryRepository;
 import com.example.fruitshopapi.repositories.CustomerRepository;
+import com.example.fruitshopapi.repositories.ProductRepository;
 import com.example.fruitshopapi.repositories.VendorRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -12,14 +14,16 @@ import org.springframework.stereotype.Component;
 @Component
 public class Bootstrap implements CommandLineRunner {
 
-    private final CategoryRepository categoryRespository;
+    private final CategoryRepository categoryRepository;
     private final CustomerRepository customerRepository;
     private final VendorRepository vendorRepository;
+    private final ProductRepository productRepository;
 
-    public Bootstrap(CategoryRepository categoryRespository, CustomerRepository customerRepository, VendorRepository vendorRepository) {
-        this.categoryRespository = categoryRespository;
+    public Bootstrap(CategoryRepository categoryRepository, CustomerRepository customerRepository, VendorRepository vendorRepository, ProductRepository productRepository) {
+        this.categoryRepository = categoryRepository;
         this.customerRepository = customerRepository;
         this.vendorRepository = vendorRepository;
+        this.productRepository = productRepository;
     }
 
     @Override
@@ -28,6 +32,40 @@ public class Bootstrap implements CommandLineRunner {
         loadCategories();
         loadCustomers();
         loadVendors();
+        loadProduct();
+    }
+
+    private void loadProduct(){
+        Product product1 = new Product();
+        product1.setName("Product 1");
+        product1.setCategory("Fruits");
+        product1.setPrice(4.56);
+        product1.setVendor("Vendor 1");
+
+        Product product2 = new Product();
+        product2.setName("Product 2");
+        product2.setCategory("Dried");
+        product2.setPrice(4.00);
+        product2.setVendor("Vendor 2");
+
+        Product product3 = new Product();
+        product3.setName("Product 3");
+        product3.setCategory("Fresh");
+        product3.setPrice(5.00);
+        product3.setVendor("Vendor 1");
+
+        Product product4 = new Product();
+        product4.setName("Product 4");
+        product4.setCategory("Fresh");
+        product4.setPrice(5.60);
+        product4.setVendor("Vendor 2");
+
+        productRepository.save(product1);
+        productRepository.save(product2);
+        productRepository.save(product3);
+        productRepository.save(product4);
+
+        System.out.println("Products Loaded: " + productRepository.count());
     }
 
     private void loadVendors() {
@@ -58,13 +96,13 @@ public class Bootstrap implements CommandLineRunner {
         Category nuts = new Category();
         nuts.setName("Nuts");
 
-        categoryRespository.save(fruits);
-        categoryRespository.save(dried);
-        categoryRespository.save(fresh);
-        categoryRespository.save(exotic);
-        categoryRespository.save(nuts);
+        categoryRepository.save(fruits);
+        categoryRepository.save(dried);
+        categoryRepository.save(fresh);
+        categoryRepository.save(exotic);
+        categoryRepository.save(nuts);
 
-        System.out.println("Categories Loaded: " + categoryRespository.count());
+        System.out.println("Categories Loaded: " + categoryRepository.count());
     }
 
     private void loadCustomers() {
