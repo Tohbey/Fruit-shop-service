@@ -6,6 +6,7 @@ import com.example.fruitshopapi.api.v1.model.VendorListDTO;
 import com.example.fruitshopapi.controllers.v1.VendorController;
 import com.example.fruitshopapi.domain.Vendor;
 import com.example.fruitshopapi.repositories.VendorRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,11 +15,11 @@ import java.util.stream.Collectors;
 @Service
 public class VendorServiceImpl implements VendorService{
 
-    private final VendorMapper vendorMapper;
+    @Autowired
+    private VendorMapper vendorMapper;
     private final VendorRepository vendorRepository;
 
-    public VendorServiceImpl(VendorMapper vendorMapper, VendorRepository vendorRepository) {
-        this.vendorMapper = vendorMapper;
+    public VendorServiceImpl( VendorRepository vendorRepository) {
         this.vendorRepository = vendorRepository;
     }
 
