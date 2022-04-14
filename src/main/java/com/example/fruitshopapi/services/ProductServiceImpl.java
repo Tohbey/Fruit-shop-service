@@ -3,7 +3,9 @@ package com.example.fruitshopapi.services;
 
 import com.example.fruitshopapi.api.v1.mapper.ProductMapper;
 import com.example.fruitshopapi.api.v1.model.ProductDTO;
+import com.example.fruitshopapi.controllers.v1.CategoryController;
 import com.example.fruitshopapi.controllers.v1.ProductController;
+import com.example.fruitshopapi.controllers.v1.VendorController;
 import com.example.fruitshopapi.domain.Product;
 import com.example.fruitshopapi.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,16 +32,27 @@ public class ProductServiceImpl implements ProductService{
                 .findAll()
                 .stream()
                 .map(product -> {
+
                     ProductDTO productDTO = productMapper.productToProductDTO(product);
                     productDTO.setProductURL(getProductUrl(product.getId()));
+                    productDTO.setCategoryURL(getCategoryUrl(product.getCategory()));
+                    productDTO.setVendorURL(getVendorUrl(product.getVendor()));
+
                     return productDTO;
                 })
                 .collect(Collectors.toList());
     }
 
     @Override
-    public Optional<Product> getProductById(Long id) {
-        return productRepository.findById(id);
+    public ProductDTO getProductById(Long id) {
+        return productRepository.findById(id)
+                .map(productMapper::productToProductDTO)
+                .map(productDTO -> {
+                    productDTO.setProductURL(getProductUrl(id));
+
+                    return productDTO;
+                })
+                .orElseThrow(ResourceNotFoundException::new);
     }
 
     @Override
@@ -72,6 +85,14 @@ public class ProductServiceImpl implements ProductService{
 
     private String getProductUrl(Long id) {
         return ProductController.BASE_URL + "/" + id;
+    }
+
+    private String getCategoryUrl(String category){
+        return CategoryController.BASE_URL +"/"+category;
+    }
+
+    private String getVendorUrl(String vendor){
+        return VendorController.BASE_URL +"/"+vendor;
     }
 
     @Override

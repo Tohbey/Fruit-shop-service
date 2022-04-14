@@ -15,4 +15,10 @@ public class ProductDTO {
 
     @JsonProperty("product_url")
     private String productURL;
+
+    @JsonProperty("category_url")
+    private String categoryURL;
+
+    @JsonProperty("vendor_url")
+    private String vendorURL;
 }
