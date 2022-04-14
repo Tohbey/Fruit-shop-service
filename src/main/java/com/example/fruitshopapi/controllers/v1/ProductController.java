@@ -47,8 +47,8 @@ public class ProductController {
 
     @RequestMapping(method = RequestMethod.PATCH, value = "/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Product patchProduct(@PathVariable Long id, @RequestBody Product product){
-        return productService.patchProduct(id, product);
+    public ProductDTO patchProduct(@PathVariable Long id, @RequestBody ProductDTO productDto){
+        return productService.patchProduct(id, productDto);
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")

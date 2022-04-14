@@ -66,7 +66,8 @@ public class ProductServiceImpl implements ProductService{
         ProductDTO returnDTO = productMapper.productToProductDTO(savedProduct);
 
         returnDTO.setProductURL(getProductUrl(savedProduct.getId()));
-
+        returnDTO.setCategoryURL(getCategoryUrl(product.getCategory()));
+        returnDTO.setVendorURL(getVendorUrl(product.getVendor()));
         return returnDTO;
     }
 
@@ -95,24 +96,38 @@ public class ProductServiceImpl implements ProductService{
         return VendorController.BASE_URL +"/"+vendor;
     }
 
+    private String getVendor(String vendorURL){
+        return vendorURL.replace(VendorController.BASE_URL+"/", "");
+    }
+
+    private String getCategory(String categoryURL){
+        return categoryURL.replace(CategoryController.BASE_URL+"/", "");
+    }
+
     @Override
-    public Product patchProduct(Long id, Product product) {
-        return productRepository.findById(id).map(product1 -> {
+    public ProductDTO patchProduct(Long id, ProductDTO productDTO) {
+        return productRepository.findById(id).map(product -> {
 
-            if(product.getName() != null) {
-                product1.setName(product.getName());
+            if(productDTO.getName() != null) {
+                product.setName(productDTO.getName());
             }
-            if(product.getPrice() != null) {
-                product1.setPrice(product.getPrice());
+            if(productDTO.getPrice() != null) {
+                product.setPrice(productDTO.getPrice());
             }
-            if(product.getCategory() != null) {
-                product1.setCategory(product.getCategory());
+            if(productDTO.getCategoryURL() != null) {
+                product.setCategory(getCategory(productDTO.getCategoryURL()));
             }
-            if(product.getVendor() != null) {
-                product1.setVendor(product.getVendor());
+            if(productDTO.getVendorURL() != null) {
+                product.setVendor(getVendor(productDTO.getVendorURL()));
             }
 
-            return product;
+            ProductDTO returnDto = productMapper.productToProductDTO(productRepository.save(product));
+
+            returnDto.setProductURL(getProductUrl(id));
+            returnDto.setCategoryURL(getCategoryUrl(product.getCategory()));
+            returnDto.setVendorURL(getVendorUrl(product.getVendor()));
+
+            return returnDto;
         }).orElseThrow(ResourceNotFoundException::new);
     }
 }

@@ -17,5 +17,5 @@ public interface ProductService {
 
     void deleteProductById(Long id);
 
-    Product patchProduct(Long id, Product product);
+    ProductDTO patchProduct(Long id, ProductDTO productDTO);
 }
