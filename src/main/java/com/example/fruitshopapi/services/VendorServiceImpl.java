@@ -15,12 +15,12 @@ import java.util.stream.Collectors;
 @Service
 public class VendorServiceImpl implements VendorService{
 
-    @Autowired
     private VendorMapper vendorMapper;
     private final VendorRepository vendorRepository;
 
-    public VendorServiceImpl( VendorRepository vendorRepository) {
+    public VendorServiceImpl(VendorMapper vendorMapper,VendorRepository vendorRepository) {
         this.vendorRepository = vendorRepository;
+        this.vendorMapper = vendorMapper;
     }
 
     @Override
