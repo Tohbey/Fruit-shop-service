@@ -5,7 +5,6 @@ import com.example.fruitshopapi.api.v1.model.CustomerDTO;
 import com.example.fruitshopapi.controllers.v1.CustomerController;
 import com.example.fruitshopapi.domain.Customer;
 import com.example.fruitshopapi.repositories.CustomerRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,12 +13,12 @@ import java.util.stream.Collectors;
 @Service
 public class CustomerServiceImpl implements CustomerService{
 
-    @Autowired
     private CustomerMapper customerMapper;
     private final CustomerRepository customerRepository;
 
-    public CustomerServiceImpl(CustomerRepository customerRepository) {
+    public CustomerServiceImpl(CustomerMapper customerMapper, CustomerRepository customerRepository) {
         this.customerRepository = customerRepository;
+        this.customerMapper = customerMapper;
     }
 
     @Override
