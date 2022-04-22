@@ -18,12 +18,12 @@ import java.util.stream.Collectors;
 @Service
 public class ProductServiceImpl implements ProductService{
 
-    @Autowired
     private ProductMapper productMapper;
     private final ProductRepository productRepository;
 
-    public ProductServiceImpl(ProductRepository productRepository){
+    public ProductServiceImpl(ProductMapper productMapper,ProductRepository productRepository){
         this.productRepository = productRepository;
+        this.productMapper = productMapper;
     }
 
     @Override
