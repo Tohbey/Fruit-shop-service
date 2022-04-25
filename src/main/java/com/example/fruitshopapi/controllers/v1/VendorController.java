@@ -22,8 +22,8 @@ public class VendorController {
 
     @RequestMapping(method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
-    public List<VendorDTO> getVendorList(){
-        return vendorService.getAllVendors();
+    public VendorListDTO getVendorList(){
+        return new VendorListDTO(vendorService.getAllVendors());
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
