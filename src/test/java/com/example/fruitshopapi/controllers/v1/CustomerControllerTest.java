@@ -108,7 +108,6 @@ public class CustomerControllerTest extends AbstractRestControllerTest {
 
         when(customerService.createNewCustomer(customer)).thenReturn(returnDTO);
 
-        //when/then
         mockMvc.perform(post(CustomerController.BASE_URL)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(asJsonString(customer)))
@@ -141,7 +140,6 @@ public class CustomerControllerTest extends AbstractRestControllerTest {
 
     @Test
     public void patchCustomer() throws Exception{
-        //given
         CustomerDTO customer = new CustomerDTO();
         customer.setFirstname("Fred");
 
