@@ -83,10 +83,10 @@ public class VendorServiceImplTest {
         List<Vendor> vendors = Arrays.asList(getVendor1(), getVendor2());
         given(vendorRepository.findAll()).willReturn(vendors);
 
-        VendorListDTO vendorListDTO = vendorService.getAllVendors();
+        List<VendorDTO> vendorListDTO = vendorService.getAllVendors();
 
         then(vendorRepository).should(times(1)).findAll();
-        assertThat(vendorListDTO.getVendors().size(), is(equalTo(2)));
+        assertThat(vendorListDTO.size(), is(equalTo(2)));
     }
 
     @Test
