@@ -39,8 +39,8 @@ public class VendorServiceImpl implements VendorService{
     }
 
     @Override
-    public VendorListDTO getAllVendors() {
-        List<VendorDTO> vendorDTOS = vendorRepository
+    public List<VendorDTO> getAllVendors() {
+        return vendorRepository
                 .findAll()
                 .stream()
                 .map(vendor -> {
@@ -49,8 +49,6 @@ public class VendorServiceImpl implements VendorService{
                     return vendorDTO;
                 })
                 .collect(Collectors.toList());
-
-        return new VendorListDTO(vendorDTOS);
     }
 
     @Override

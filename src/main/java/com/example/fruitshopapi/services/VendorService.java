@@ -3,10 +3,12 @@ package com.example.fruitshopapi.services;
 import com.example.fruitshopapi.api.v1.model.VendorDTO;
 import com.example.fruitshopapi.api.v1.model.VendorListDTO;
 
+import java.util.List;
+
 public interface VendorService {
     VendorDTO getVendorById(Long id);
 
-    VendorListDTO getAllVendors();
+    List<VendorDTO> getAllVendors();
 
     VendorDTO createNewVendor(VendorDTO vendorDTO);
 

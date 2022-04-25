@@ -6,6 +6,8 @@ import com.example.fruitshopapi.services.VendorService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(VendorController.BASE_URL)
 public class VendorController {
@@ -21,7 +23,7 @@ public class VendorController {
     @RequestMapping(method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
     public VendorListDTO getVendorList(){
-        return vendorService.getAllVendors();
+        return new VendorListDTO(vendorService.getAllVendors());
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
