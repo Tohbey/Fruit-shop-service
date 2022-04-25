@@ -1,4 +1,4 @@
-package com.example.fruitshopapi.services;
+package com.example.fruitshopapi.controllers.v1;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 

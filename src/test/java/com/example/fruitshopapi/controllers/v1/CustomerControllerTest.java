@@ -2,7 +2,6 @@ package com.example.fruitshopapi.controllers.v1;
 
 import com.example.fruitshopapi.api.v1.model.CustomerDTO;
 import com.example.fruitshopapi.controllers.RestResponseEntityExceptionHandler;
-import com.example.fruitshopapi.services.AbstractRestControllerTest;
 import com.example.fruitshopapi.services.CustomerService;
 import com.example.fruitshopapi.services.ResourceNotFoundException;
 import org.mockito.InjectMocks;
@@ -16,7 +15,6 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.util.Arrays;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 import static org.hamcrest.Matchers.equalTo;
