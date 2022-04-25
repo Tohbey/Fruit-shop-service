@@ -110,7 +110,7 @@ public class VendorControllerTest extends AbstractRestControllerTest{
 
         mockMvc.perform(post(VendorController.BASE_URL)
                 .contentType(MediaType.APPLICATION_JSON)
-                .contentType(asJsonString(vendor)))
+                .content(asJsonString(vendor)))
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.name", equalTo("vendor 1")));
     }
@@ -128,7 +128,7 @@ public class VendorControllerTest extends AbstractRestControllerTest{
 
         mockMvc.perform(put(VendorController.BASE_URL +"/1")
                 .contentType(MediaType.APPLICATION_JSON)
-                .contentType(asJsonString(vendorDTO)))
+                .content(asJsonString(vendorDTO)))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.name", equalTo("vendor 1")))
                 .andExpect(jsonPath("$.vendor_url",equalTo(VendorController.BASE_URL+"/1")));
@@ -147,7 +147,7 @@ public class VendorControllerTest extends AbstractRestControllerTest{
 
         mockMvc.perform(patch(VendorController.BASE_URL +"/1")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .contentType(asJsonString(vendorDTO)))
+                        .content(asJsonString(vendorDTO)))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.name", equalTo("vendor 1")))
                 .andExpect(jsonPath("$.vendor_url",equalTo(VendorController.BASE_URL+"/2")));
